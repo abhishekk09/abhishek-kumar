@@ -1,227 +1,152 @@
-import {
-  FaEnvelope,
-  FaPhone,
-  FaMapMarkerAlt,
-  FaGithub,
-  FaLinkedin,
-} from 'react-icons/fa'; // Import icons
+'use client';
+import React, { useState } from 'react';
+import { motion } from 'framer-motion';
+import { FaLinkedin, FaGithub, FaEnvelope } from 'react-icons/fa';
 
-export default function Home() {
-  const resumeData = {
-    // Your resume data
-    name: 'Your Name',
-    title: 'Your Title',
-    email: 'your.email@example.com',
-    phone: '123-456-7890',
-    location: 'Your City, State',
-    github: 'yourusername',
-    linkedin: 'yourprofile',
-    summary: 'A brief summary about you...',
-    experience: [
-      {
-        title: 'Job Title',
-        company: 'Company Name',
-        dates: '2020 - Present',
-        description: 'Responsibilities and achievements...',
-      },
-      // ... more experiences
-    ],
-    education: [
-      {
-        degree: 'Degree Name',
-        university: 'University Name',
-        dates: '2016 - 2020',
-      },
-      // ... more education
-    ],
-    skills: ['JavaScript', 'React', 'Next.js' /* ... */],
-  };
+// import {
+//   FaEnvelope,
+//   FaPhone,
+//   FaMapMarkerAlt,
+//   FaGithub,
+//   FaLinkedin,
+// } from 'react-icons/fa';
+
+const resumeData = {
+  name: 'Abhishek Kumar',
+  title: 'Senior Software Engineer / Engineer Manager',
+  summary:
+    'Experienced developer skilled in React, Node.js, and modern web technologies.',
+  contact: {
+    email: 'abhishek0909kumar@gmail.com',
+    phone: '+91-9888630787',
+    location: 'Bangalore , India',
+    linkedin: 'https://linkedin.com/in/abhishek09',
+    github: 'https://github.com/abhishekk09',
+  },
+  experience: [
+    {
+      company: 'Tech Corp',
+      role: 'Senior Developer',
+      duration: '2020 - Present',
+      description: 'Developing and maintaining web applications.',
+    },
+    {
+      company: 'Web Solutions',
+      role: 'Frontend Developer',
+      duration: '2017 - 2020',
+      description: 'Worked on UI/UX and front-end development.',
+    },
+  ],
+  education: [
+    {
+      institution: 'XYZ University',
+      degree: 'B.Sc. Computer Science',
+      year: '2013 - 2017',
+    },
+  ],
+  skills: ['React', 'Node.js', 'JavaScript', 'CSS', 'HTML'],
+  projects: [
+    {
+      name: 'Portfolio Website',
+      description: 'A personal portfolio built using React.',
+      link: 'https://portfolio.example.com',
+    },
+    {
+      name: 'E-commerce Platform',
+      description:
+        'Developed an e-commerce platform with full-stack capabilities.',
+      link: 'https://ecommerce.example.com',
+    },
+  ],
+};
+
+const Home = () => {
+  const [isDrawerOpen, setDrawerOpen] = useState(false);
+  const [activeTab, setActiveTab] = useState('home');
 
   return (
-    <div className="container mx-auto p-8">
-      {' '}
-      {/* Tailwind classes for centering and padding */}
-      <div className="text-center mb-8">
-        <h1 className="text-3xl font-bold">{resumeData.name}</h1>
-        <h2 className="text-xl">{resumeData.title}</h2>
-      </div>
-      <div className="flex justify-center space-x-4 mb-4">
-        {' '}
-        {/* Contact Info */}
-        <a href={`mailto:${resumeData.email}`}>
-          <FaEnvelope /> {resumeData.email}
-        </a>
-        <a href={`tel:${resumeData.phone}`}>
-          <FaPhone /> {resumeData.phone}
-        </a>
-        <span>
-          <FaMapMarkerAlt /> {resumeData.location}
-        </span>
-        <a
-          href={`https://github.com/${resumeData.github}`}
-          target="_blank"
-          rel="noopener noreferrer"
+    <div className="relative font-sans bg-gray-900 min-h-screen">
+      <header className="bg-gray-800 text-white p-4 flex justify-between items-center shadow-md">
+        <h1 className="text-2xl font-bold capitalize">{activeTab}</h1>
+        <button
+          onClick={() => setDrawerOpen(!isDrawerOpen)}
+          className="text-white text-xl"
         >
-          <FaGithub /> GitHub
-        </a>
-        <a
-          href={`https://www.linkedin.com/in/${resumeData.linkedin}`}
-          target="_blank"
-          rel="noopener noreferrer"
+          ☰
+        </button>
+      </header>
+
+      {isDrawerOpen && (
+        <motion.div
+          initial={{ x: 100 }}
+          animate={{ x: 0 }}
+          exit={{ x: 100 }}
+          className="fixed top-0 right-0 w-64 h-full bg-gray-900 text-white p-6 shadow-lg"
         >
-          <FaLinkedin /> LinkedIn
-        </a>
-      </div>
-      {/* Summary */}
-      <div className="mb-6">
-        <h2 className="text-2xl font-bold mb-2">Summary</h2>
-        <p>{resumeData.summary}</p>
-      </div>
-      {/* Experience */}
-      <div className="mb-6">
-        <h2 className="text-2xl font-bold mb-2">Experience</h2>
-        {resumeData.experience.map((exp, index) => (
-          <div key={index} className="mb-4">
-            <h3 className="text-xl font-semibold">{exp.title}</h3>
-            <p className="text-gray-600">
-              {exp.company} | {exp.dates}
+          <button onClick={() => setDrawerOpen(false)} className="mb-4 text-lg">
+            Close ✕
+          </button>
+          <ul className="space-y-4">
+            {['home', 'experience', 'education', 'skills', 'projects'].map(
+              (tab) => (
+                <li
+                  key={tab}
+                  className={`cursor-pointer text-lg ${
+                    activeTab === tab ? 'text-blue-400' : 'text-white'
+                  }`}
+                  onClick={() => {
+                    setActiveTab(tab);
+                    setDrawerOpen(false);
+                  }}
+                >
+                  {tab.charAt(0).toUpperCase() + tab.slice(1)}
+                </li>
+              ),
+            )}
+          </ul>
+        </motion.div>
+      )}
+
+      <div className="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-md mt-6">
+        {activeTab === 'home' && (
+          <motion.div
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 1 }}
+          >
+            <h1 className="text-3xl font-bold text-center text-gray-800">
+              {resumeData.name}
+            </h1>
+            <h2 className="text-xl text-center text-gray-600">
+              {resumeData.title}
+            </h2>
+            <p className="text-center mt-2 text-gray-700">
+              {resumeData.summary}
             </p>
-            <ul className="list-disc ml-6">
-              {exp.description.split('\n').map(
-                (
-                  point,
-                  i, // Handle multi-line descriptions
-                ) => (
-                  <li key={i}>{point}</li>
-                ),
-              )}
-            </ul>
-          </div>
-        ))}
-      </div>
-      {/* Education */}
-      <div className="mb-6">
-        <h2 className="text-2xl font-bold mb-2">Education</h2>
-        {resumeData.education.map((edu, index) => (
-          <div key={index} className="mb-4">
-            <h3 className="text-xl font-semibold">{edu.degree}</h3>
-            <p className="text-gray-600">
-              {edu.university} | {edu.dates}
-            </p>
-          </div>
-        ))}
-      </div>
-      {/* Skills */}
-      <div>
-        <h2 className="text-2xl font-bold mb-2">Skills</h2>
-        <ul className="list-disc ml-6">
-          {resumeData.skills.map((skill, index) => (
-            <li key={index}>{skill}</li>
-          ))}
-        </ul>
+          </motion.div>
+        )}
+
+        {activeTab === 'experience' && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.5 }}
+          >
+            <h3 className="text-2xl font-semibold">Experience</h3>
+            {resumeData.experience.map((exp, index) => (
+              <div key={index} className="mt-4 border-b pb-2">
+                <h4 className="text-xl font-medium">{exp.company}</h4>
+                <p className="text-gray-600">
+                  {exp.role} ({exp.duration})
+                </p>
+                <p>{exp.description}</p>
+              </div>
+            ))}
+          </motion.div>
+        )}
       </div>
     </div>
   );
-}
+};
 
-// import Image from 'next/image';
-
-// export default function Home() {
-//   return (
-//     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-//       <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-//         <Image
-//           className="dark:invert"
-//           src="/next.svg"
-//           alt="Next.js logo"
-//           width={180}
-//           height={38}
-//           priority
-//         />
-//         <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-//           <li className="mb-2">
-//             Get started by editing{' '}
-//             <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-//               app/page.tsx
-//             </code>
-//             .
-//           </li>
-//           <li>Save and see your changes instantly.</li>
-//         </ol>
-
-//         <div className="flex gap-4 items-center flex-col sm:flex-row">
-//           <a
-//             className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-//             href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-//             target="_blank"
-//             rel="noopener noreferrer"
-//           >
-//             <Image
-//               className="dark:invert"
-//               src="/vercel.svg"
-//               alt="Vercel logomark"
-//               width={20}
-//               height={20}
-//             />
-//             Deploy now
-//           </a>
-//           <a
-//             className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-//             href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-//             target="_blank"
-//             rel="noopener noreferrer"
-//           >
-//             Read our docs
-//           </a>
-//         </div>
-//       </main>
-//       <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-//         <a
-//           className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-//           href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-//           target="_blank"
-//           rel="noopener noreferrer"
-//         >
-//           <Image
-//             aria-hidden
-//             src="/file.svg"
-//             alt="File icon"
-//             width={16}
-//             height={16}
-//           />
-//           Learn
-//         </a>
-//         <a
-//           className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-//           href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-//           target="_blank"
-//           rel="noopener noreferrer"
-//         >
-//           <Image
-//             aria-hidden
-//             src="/window.svg"
-//             alt="Window icon"
-//             width={16}
-//             height={16}
-//           />
-//           Examples
-//         </a>
-//         <a
-//           className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-//           href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-//           target="_blank"
-//           rel="noopener noreferrer"
-//         >
-//           <Image
-//             aria-hidden
-//             src="/globe.svg"
-//             alt="Globe icon"
-//             width={16}
-//             height={16}
-//           />
-//           Go to nextjs.org →
-//         </a>
-//       </footer>
-//     </div>
-//   );
-// }
+export default Home;
