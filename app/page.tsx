@@ -1,7 +1,7 @@
 'use client';
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { FaLinkedin, FaGithub, FaEnvelope } from 'react-icons/fa';
+// import { FaLinkedin, FaGithub, FaEnvelope } from 'react-icons/fa';
 
 // import {
 //   FaEnvelope,
