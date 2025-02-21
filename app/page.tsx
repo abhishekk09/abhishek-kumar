@@ -1,6 +1,8 @@
 'use client';
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import Link from 'next/link';
+
 // import { FaLinkedin, FaGithub, FaEnvelope } from 'react-icons/fa';
 
 // import {
@@ -107,22 +109,43 @@ const Home = () => {
         </motion.div>
       )}
 
-      <div className="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-md mt-6">
+      <div className="max-w-4xl mx-auto p-6 rounded-lg shadow-md mt-6">
         {activeTab === 'home' && (
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 1 }}
           >
-            <h1 className="text-3xl font-bold text-center text-gray-800">
+            <h1 className="text-3xl font-bold text-center text-white">
               {resumeData.name}
             </h1>
-            <h2 className="text-xl text-center text-gray-600">
+            <h2 className="text-xl text-center text-white">
               {resumeData.title}
             </h2>
-            <p className="text-center mt-2 text-gray-700">
-              {resumeData.summary}
-            </p>
+            <p className="text-center mt-2 text-white">{resumeData.summary}</p>
+            <Link
+              href={'/Abhishek_Resume.pdf'}
+              target="_blank"
+              rel="noopener noreferrer"
+              // download
+              className="text-white"
+            >
+              <button className="text-xl text-center text-white">
+                View Resume
+              </button>
+            </Link>
+
+            <Link
+              href={'/Abhishek_Resume.pdf'}
+              target="_blank"
+              rel="noopener noreferrer"
+              download
+              className="text-white"
+            >
+              <button className="text-xl text-center text-white">
+                Download Resume
+              </button>
+            </Link>
           </motion.div>
         )}
 
