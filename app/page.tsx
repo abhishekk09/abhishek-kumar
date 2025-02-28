@@ -96,8 +96,8 @@ const SocialLinks = () => {
 };
 
 const Home = () => {
-  const [isDrawerOpen, setDrawerOpen] = useState(false);
-  const [activeTab, setActiveTab] = useState("home");
+  // const [isDrawerOpen, setDrawerOpen] = useState(false);
+  const [activeTab] = useState("home");
 
   return (
     <div className="font-sans bg-gray-900 sm:h-screen">
