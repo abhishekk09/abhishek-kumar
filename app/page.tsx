@@ -12,7 +12,7 @@ const Main = () => {
     <body className="overflow-x-hidden">
       <Home />
       <section className=" h-screen py-20 px-6 text-center bg-gray-800 sticky top-0 place-items-center">
-        <h2 className="text-xl md:text-5xl ">About Me</h2>
+        <h2 className="text-xl md:text-5xl text-white ">About Me</h2>
         <p className="max-w-2xl text-gray-300 p-6 text-xl">
           {
             "Experienced Software Engineer with a strong background in the IT and services industry. Skilled in React.js, Next.js, JavaScript, and React Native, with expertise in leading and managing development teams. Proficient in team leadership, project management, sales, and public speaking, with a track record of delivering high-quality software solutions. Adept at driving technical excellence and fostering collaboration to achieve business goals."
